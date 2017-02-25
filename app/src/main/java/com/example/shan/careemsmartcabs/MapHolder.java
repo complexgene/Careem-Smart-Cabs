@@ -29,6 +29,7 @@ public class MapHolder extends AppCompatActivity implements OnMapReadyCallback{
         Log.e("MapHolder", location);
         lati = Double.parseDouble(location.split(",")[0]);
         longi = Double.parseDouble(location.split(",")[1]);
+        Log.e("mapHOlder",""+lati+" "+longi);
 
     }
 
