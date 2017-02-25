@@ -5,25 +5,57 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.test.mock.MockPackageManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
+import com.example.shan.careemsmartcabs.model.User;
+import com.example.shan.careemsmartcabs.service.APIGatewayServiceImpl;
+import com.example.shan.careemsmartcabs.service.APIGatewayServiceInterface;
 import com.example.shan.careemsmartcabs.service.GPSTracker;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_PERMISSION = 2;
     String mPermission = android.Manifest.permission.ACCESS_FINE_LOCATION;
 
+    APIGatewayServiceInterface serviceBot = new APIGatewayServiceImpl();
+    User singleTonUser = User.getInstance();
+
     GPSTracker gps;
-    double mLatitudeText, mLongitudeText;
+    double userLatitude, userLongitude;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        askForLocationPermission();
+
+        Button btn_bookCab = (Button)findViewById(R.id.bookride);
+        btn_bookCab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gps = new GPSTracker(MainActivity.this);
+                if(gps.canGetLocation()){
+                    userLatitude = gps.getLatitude();
+                    userLongitude = gps.getLongitude();
+                }else{
+                    gps.showSettingsAlert();
+                }
+                ArrayList<String> nearByCabLocations = serviceBot.getAllCabsLocationAroundUser(userLatitude,userLongitude);
+
+                Intent ii = new Intent(MainActivity.this, MapHolder.class);
+                ii.putExtra("userloc",userLatitude+","+userLongitude);
+                for(int i=0;i<nearByCabLocations.size();i++){
+                    ii.putStringArrayListExtra("allcabsloc",nearByCabLocations);
+                }
+                startActivity(ii);
+            }
+        });
+    }
+    void askForLocationPermission(){
         try {
             if (ActivityCompat.checkSelfPermission(this, mPermission)
                     != PackageManager.PERMISSION_GRANTED) {
@@ -37,34 +69,5 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
-
-        Button btn_bookCab = (Button)findViewById(R.id.bookride);
-        btn_bookCab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // create class object
-                gps = new GPSTracker(MainActivity.this);
-
-                // check if GPS enabled
-                if(gps.canGetLocation()){
-
-                    mLatitudeText = gps.getLatitude();
-                    mLongitudeText = gps.getLongitude();
-
-                    // \n is for new line
-                }else{
-                    // can't get location
-                    // GPS or Network is not enabled
-                    // Ask user to enable GPS/network in settings
-                    gps.showSettingsAlert();
-                }
-                Intent ii = new Intent(MainActivity.this, MapHolder.class);
-                Log.e("MainAct",mLatitudeText+","+mLongitudeText);
-                ii.putExtra("userloc",mLatitudeText+","+mLongitudeText);
-                startActivity(ii);
-            }
-        });
     }
 }

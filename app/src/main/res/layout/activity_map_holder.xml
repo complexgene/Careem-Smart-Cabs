@@ -12,13 +12,21 @@
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <fragment
-        android:id="@+id/cab_map"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="com.example.shan.careemsmartcabs.MapsActivity" />
+        <fragment
+            android:id="@+id/cab_map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context="com.example.shan.careemsmartcabs.MapsActivity" />
     </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=" Click on a type of cab to book"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:background="@color/appcolor"
+        />
     <LinearLayout
         android:layout_below="@id/cab_map"
         android:layout_width="match_parent"
@@ -32,17 +40,39 @@
             android:layout_height="wrap_content"
             android:text="Micro"
             />
+        <ImageButton
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/cab"
+            android:background="#FFFFFF"
+            />
         <Button
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Mini"
             />
+        <ImageButton
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/cab_mini"
+            android:background="#FFFFFF"
+            />
         <Button
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Sedan"
+            />
+        <ImageButton
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/cab_sedan"
+            android:layout_marginRight="2dp"
+            android:background="#FFFFFF"
             />
     </LinearLayout>
 </LinearLayout>
