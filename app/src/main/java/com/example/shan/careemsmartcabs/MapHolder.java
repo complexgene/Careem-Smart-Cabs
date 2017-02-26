@@ -1,5 +1,7 @@
 package com.example.shan.careemsmartcabs;
 
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.shan.careemsmartcabs.service.APIGatewayServiceImpl;
 import com.example.shan.careemsmartcabs.service.APIGatewayServiceInterface;
@@ -37,6 +40,82 @@ public class MapHolder extends AppCompatActivity implements OnMapReadyCallback{
         lati = Double.parseDouble(location.split(",")[0]);
         longi = Double.parseDouble(location.split(",")[1]);
         allCabsLocation = getIntent().getExtras().getStringArrayList("allcabsloc");
+
+        Button microCab = (Button)findViewById(R.id.cab_micro),
+                miniCab = (Button)findViewById(R.id.cab_mini),
+                sedanCab = (Button)findViewById(R.id.cab_sedan);
+        microCab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final ProgressDialog pd = ProgressDialog.show(MapHolder.this,"Booking a Micro","Wait while we book a micro for you.");
+                pd.show();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                pd.dismiss();
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(getApplicationContext(),"Your location Lat:"+lati+" and Long:"+longi+" has been sent to server for nearest cab booking..",Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                            }
+                        }).start();
+                    }
+                },2000);
+            }
+        });
+        miniCab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final ProgressDialog pd = ProgressDialog.show(MapHolder.this,"Booking a Mini","Wait while we book a mini for you.");
+                pd.show();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                pd.dismiss();
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(getApplicationContext(),"Your location Lat:"+lati+" and Long:"+longi+" has been sent to server for nearest cab booking..",Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                            }
+                        }).start();
+                    }
+                },2000);
+            }
+        });
+        sedanCab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final ProgressDialog pd = ProgressDialog.show(MapHolder.this,"Booking a Sedan","Wait while we book a sedan for you.");
+                pd.show();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                pd.dismiss();
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(getApplicationContext(),"Your location Lat:"+lati+" and Long:"+longi+" has been sent to server for nearest cab booking..",Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                            }
+                        }).start();
+                    }
+                },2000);
+            }
+        });
     }
     APIGatewayServiceInterface serviceBot = new APIGatewayServiceImpl();
     void newLatLong(){
