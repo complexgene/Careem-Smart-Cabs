@@ -3,6 +3,7 @@ package com.example.shan.careemsmartcabs;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -24,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
 
     GPSTracker gps;
     double userLatitude, userLongitude;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
     void askForLocationPermission(){
         try {
             if (ActivityCompat.checkSelfPermission(this, mPermission)

@@ -15,12 +15,15 @@
         >
         <Button
             android:id="@+id/bookride"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="250dp"
+            android:layout_height="170dp"
+            android:textSize="25dp"
+            android:textColor="#FFFFFF"
             android:text="Book A Ride"
+            android:background="@color/colorPrimaryDark"
             android:gravity="center"
             />
-        <Button
+        <!--<Button
             android:id="@+id/seeprices"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -31,6 +34,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Raise a Complaint"
-            />
+            />-->
     </LinearLayout>
 </RelativeLayout>

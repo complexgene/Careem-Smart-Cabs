@@ -7,6 +7,7 @@ package com.example.shan.careemsmartcabs.model;
 public class User {
     private String userMobileNumer;
     private String userName;
+
     private static User singleTonUser;
 
     private User(){}
@@ -32,5 +33,5 @@ public class User {
     public void setUserName(String userName) {
         this.userName = userName;
     }
-    
+
 }
