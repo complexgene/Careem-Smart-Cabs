@@ -6,7 +6,7 @@ package com.example.shan.careemsmartcabs.dao;
 
 public class APIEndpoints {
     // Controller cab engine API Endpoints
-    private static String cabEngineBaseURL = "http://localhost:5682/rideengine/webapi/";
+    private static String cabEngineBaseURL = "http://localhost:5682/rideengine/webapi";
 
 
 

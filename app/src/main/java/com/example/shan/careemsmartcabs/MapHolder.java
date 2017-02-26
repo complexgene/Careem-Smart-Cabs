@@ -80,7 +80,7 @@ public class MapHolder extends AppCompatActivity implements OnMapReadyCallback{
                 }).start();
                 newLatLong();
             }
-        },150000);
+        },150);
     }
 
     @Override
